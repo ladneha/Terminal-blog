@@ -1,10 +1,22 @@
 _author_ = "neha"
 
 from models.post import Post
+from database import Database
+from models.blog import Blog
 
-post = Post("Post1 title", "Post1 content", "Post1 author")
-post2 = Post("Post2 title", "Post2 content", "Post2 author")
-post3 = Post("Post3 title", "Post3 content", "Post3 author")
+Database.initialize()
 
-print(post.content)
-print(post2.content)
+blog = Blog(author="Neha",
+            title="Sample title",
+            description="Sample description")
+
+blog.new_post()
+
+blog.save_to_mongo()
+
+from_database = Blog.from_mongo(blog.id)
+
+print(blog.get_posts())
+#post.save_to_mongo()
+
+#print(post2.content)
